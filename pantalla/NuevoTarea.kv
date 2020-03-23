@@ -1,0 +1,88 @@
+<NuevoTarea>:
+	GridLayout:
+		cols: 12
+        rows: 12
+	BoxLayout:
+		orientation: 'vertical'
+		Label:
+			text:"Agregar nueva Tarea"
+			pos_hint: {'right': 1}
+		Label:
+			text: 'fecha '
+			pos_hint: {'left': 1}
+		Spinner:
+			size_hint_y: None
+			height: 20
+			
+			text: '<Integrante>'
+			id:Integrante
+			values:
+				[
+				'luis',
+				'gabriel',
+				'maria',
+				'paola'
+				]
+			on_text: Integrante.text = self.text
+		Spinner:
+			id: Operacion
+			size_hint_y: None
+			height: 20
+			text: '<Operacion>'
+			values:
+				[
+				'pulir',
+				'abotonar',
+				'lavar',
+				'planchar',
+				'pegar botones',
+				'desvarate'
+				]
+			on_text: Operacion.text = self.text
+		Spinner:
+			text: '<Lote>'
+			id:Lote
+			size_hint_y: None
+			height: 20
+			values:
+				[
+				'S313',
+				'H1CC5800045',
+				'S13546',
+				'S122232A',
+				'S1213sdds5'
+				]
+			on_text: Lote.text = self.text
+		Spinner:
+			id:Talla_Tarea
+			text: '<Talla>'
+			size_hint_y: None
+			height: 20
+			values:
+				[
+				'Sin talla'
+				'4',
+				'6',
+				'8',
+				'10',
+				'12',
+				'14',
+				'16'
+				]
+			on_text: Talla_Tarea.text = self.text
+		TextInput:
+			hint_text: 'Cantidad Tomada'
+			id:Cantidad_Tomada
+			text: '35'
+		TextInput:
+			id:Cantidad_NoFinalizasada
+			hint_text:'Cantidad No Finalizasada'
+			text: '3'
+		Button:
+			text: 'Guardar'
+			pos_hint: {'right': 1}
+			on_press:root.tarea(Integrante.text,Operacion.text,Lote.text,Cantidad_Tomada.text,Talla_Tarea.text,Cantidad_NoFinalizasada.text)
+		Button:
+			text: 'Cancelar '
+			pos_hint: {'left': 1}
+			on_press: root.manager.current = 'menu'

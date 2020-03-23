@@ -1,0 +1,60 @@
+#:import c kivymd.textfields.MDTextField
+#:import MDLabel kivymd.label.MDLabel
+<NuevoLote>:
+	markup: True
+	valign: 'bottom'
+    GridLayout:
+        cols: 6
+        rows: 6
+    BoxLayout:
+		orientation: 'vertical'
+		Label:
+			text:"Agregar nuevo Lote"
+			pos_hint: {'right': 1}
+		Label:
+			text: 'fecha '
+			pos_hint: {'left': 1}
+		TextInput:
+			hint_text: 'Lote Total'
+			id:Lote_Total
+			text: 'Monoline textinput'
+		TextInput:		
+			hint_text: 'Lote Faltante'
+			id:Lote_Faltante
+			text: 'Lote_Faltante'
+		TextInput:
+			hint_text: 'OP'
+			id: op
+			text: 'Monoline4 textinput'
+		TextInput:
+			hint_text: 'Numero de Referencia'
+			text: 'Monoline5 textinput'
+			id: Num_Referencia
+		TextInput:
+			hint_text: 'Foto Prenda 1'
+			id:Foto_Prenda1
+			text: 'Monoline6 textinput'
+		TextInput:
+			hint_text: 'Foto prenda 2'
+			id:Foto_Prenda2
+			text: 'Monoline textinput'
+		TextInput:
+			hint_text: 'Detalle Lote'
+			id:Detalle_Lote
+			text: 'Monoline textinput'
+		Spinner:
+			text: '<Estado>'
+			id:Estado
+			size_hint_y: None
+			height: 20
+			on_text: Estado.text = self.text
+			on_press: pass
+			
+		Button:
+			text: 'Guardar'
+			pos_hint: {'right': 1}
+			on_press:root.lote(op.text,Num_Referencia.text,Foto_Prenda1.text,Foto_Prenda2.text,Lote_Total.text,Lote_Faltante.text,Detalle_Lote.text,Estado.text)
+		Button:
+			text: 'Cancelar'
+			pos_hint: {'left': 1}
+			on_press: root.manager.current = 'menu'

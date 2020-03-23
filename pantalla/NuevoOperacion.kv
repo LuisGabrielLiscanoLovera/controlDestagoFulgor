@@ -1,0 +1,44 @@
+<NuevoOperacion>:
+    GridLayout:
+        cols: 6
+        rows: 6
+    BoxLayout:
+		orientation: 'vertical'
+		Label:
+			text:"Agregar nueva Operacion"
+			pos_hint: {'right': 1}
+		Label:
+			text: 'fecha '
+			pos_hint: {'left': 1}
+		TextInput:
+			hint_text: 'Nombre Operacioon'
+			id: Nombre_Operacion
+			text: 'Monoline4 textinput'
+		TextInput:
+			hint_text: 'Precio de la Operacion $'
+			text: 'Monoline5 textinput'
+			id: Precio_Operacion
+		TextInput:
+			hint_text: 'Duracion de la Operacion'
+			id:Duracion_Operacion
+			text: 'Monoline6 textinput'
+		TextInput:
+			hint_text: 'Cantidad al dia'
+			id:Cantidad_Dia
+			text: 'Monoline textinput'
+		TextInput:
+			hint_text: 'Detalle de la Operacion'
+			id:Detalle_Operacion
+			text: 'Monoline2 textinput'
+		TextInput:
+			id: Foto_Operacion
+			hint_text: 'foto Operacion'
+			text: 'Monoline3 textinput'
+		Button:
+			text: 'Guardar'
+			pos_hint: {'right': 1}
+			on_press:root.operacion(Nombre_Operacion.text,Precio_Operacion.text,Duracion_Operacion.text,Cantidad_Dia.text,Foto_Operacion.text,Detalle_Operacion.text)
+		Button:
+			text: 'Cancelar '
+			pos_hint: {'left': 1}
+			on_press: root.manager.current = 'menu'

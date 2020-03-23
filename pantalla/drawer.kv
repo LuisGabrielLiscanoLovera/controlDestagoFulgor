@@ -1,0 +1,303 @@
+
+<ContentNavigationDrawer>:
+	ScrollView:
+
+		MDList:
+			AnchorLayout:
+				anchor_x: "center"
+				size_hint_y: None
+				height: avatar.height
+
+				Image:
+					id: avatar
+					size_hint: None, None
+					size: "150dp", "150dp"
+					source: "confeccion.jpg"
+			OneLineListItem:
+				text: "Integrante"
+				on_press:
+					root.nav_drawer.set_state("close")
+					root.screen_manager.current = "scr 1"
+			OneLineListItem:
+				text: "Agregar nuevo Lote"
+				on_press:
+					root.nav_drawer.set_state("close")
+					root.screen_manager.current = "scr 2"
+
+			OneLineListItem:
+				text: "Agregar Tarea"
+				on_press:
+					root.nav_drawer.set_state("close")
+					root.screen_manager.current = "scr 3"
+			OneLineListItem:
+				text: "Agregar Operacion"
+				on_press:
+					root.nav_drawer.set_state("close")
+					root.screen_manager.current = "scr 4"
+			OneLineListItem:
+				text: "Registro"
+				on_press:
+					root.nav_drawer.set_state("close")
+					root.screen_manager.current = "scr 5"
+			OneLineListItem:
+				text: "Configuracion"
+				on_press:
+					root.nav_drawer.set_state("close")
+					root.screen_manager.current = "scr 6"
+Screen:
+	MDToolbar:
+		id: toolbar
+		pos_hint: {"top": 1}
+		elevation: 10
+		title: "Control de tarea y destajo"
+		left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+	NavigationLayout:
+		x: toolbar.height
+		ScreenManager:
+			id: screen_manager
+			Screen:
+				name: "scr 1"
+				BoxLayout:
+					adaptive_height: True
+					orientation: "vertical"
+					size_hint_y: None
+					height: self.minimum_height
+					padding: dp(48)
+					spacing: 10
+					MDLabel:
+						text: "Agregar nuevo Integrante"
+						halign: "center"
+					MDTextField:
+						id: Nombre_Completo
+						hint_text: 'Nombre Completo'
+					MDTextField:
+						id: Num_Documento
+						hint_text: 'Numero de Documento'
+					MDTextField:
+						id:Foto_Integrante		
+						hint_text: 'Foto Integrante'
+					MDTextField:
+						id:Foto_Firma
+						hint_text: 'Foto Firma'
+					MDFlatButton:
+						pos_hint: {"center_x": .5, "center_y": .5}
+						icon: "language-python"
+						text: "Guardar"
+						md_bg_color: 0, 1, 0, 1
+						on_press: app.integrante(Nombre_Completo.text,Num_Documento.text,Foto_Integrante.text,Foto_Firma.text)	
+					MDFlatButton:
+						pos_hint: {"center_x": .5, "center_y": 5.1}
+						icon: "language-python"
+						text: "Cancelar"
+						md_bg_color: 1, 0,0, 1
+			Screen:
+				name: "scr 2"
+				BoxLayout:
+					size_hint: 1,2
+					size: 300, 250
+					height: self.minimum_height
+					padding: dp(48)
+					spacing: 1
+					orientation: 'vertical'
+					MDLabel:
+						text:"Agregar nuevo Lote"
+						halign: "center"
+					MDTextField:
+						id:Lote_Total
+						hint_text: 'Lote Total'
+					MDTextField:		
+						id:Lote_Faltante
+						hint_text: 'Lote Faltante'
+					MDTextField:
+						id: op
+						hint_text: 'OP'
+					MDTextField:
+						id: Num_Referencia
+						hint_text: 'Numero de Referencia'
+					MDTextField:
+						hint_text: 'Foto Prenda 1'
+						id:Foto_Prenda1
+					MDTextField:
+						id:Foto_Prenda2
+						hint_text: 'Foto prenda 2'
+					MDTextField:
+						id:Detalle_Lote
+						hint_text: 'Detalle Lote'
+					MDDropDownItem:
+						id:Estado
+						dropdown_bg: [1, 1, 1, 1]
+						text: '<Estado>'
+						on_text: Estado.text = self.items
+						items:app.selectEstado()
+
+
+					MDDropDownItem: 
+						items: ['1 hello', '2 yyy', '3 kntl'] 
+						pos_hint: {"center_x": .5, "center_y": .6} 
+						on_select: app.handle_select 
+						
+
+
+						
+					MDFlatButton:
+						pos_hint: {"center_x": .5, "center_y": .5}
+						icon: "language-python"
+						text: "Guardar"
+						md_bg_color: 0, 1, 0, 1
+						on_press:app.lote(op.text,Num_Referencia.text,Foto_Prenda1.text,Foto_Prenda2.text,Lote_Total.text,Lote_Faltante.text,Detalle_Lote.text,Estado.text)
+					MDFlatButton:
+						pos_hint: {"center_x": .5, "center_y": 5.1}
+						icon: "language-python"
+						text: "Cancelar"
+						md_bg_color: 1, 0,0, 1
+			Screen:
+				name: "scr 3"
+				BoxLayout:
+					size_hint: 1,2
+					size: 300, 250
+					height: self.minimum_height
+					padding: dp(48)
+					spacing: 1
+					orientation: 'vertical'
+					MDLabel:
+						text:"Agregar nueva Tarea"
+						pos_hint: {'right': 1}
+					MDDropDownItem:
+						id: dropdown_item
+						items:['luis','millonariios']
+						dropdown_bg: [1, 1, 1, 1]
+					Spinner:
+						size_hint_y: None
+						height: 20
+						text: '<Integrante>'
+						id:Integrante
+						values:
+							[
+							'luis',
+							'gabriel',
+							'maria',
+							'paola'
+							]
+						on_text: Integrante.text = self.text
+					Spinner:
+						id: Operacion
+						size_hint_y: None
+						height: 20
+						text: '<Operacion>'
+						values:
+							[
+							'pulir',
+							'abotonar',
+							'lavar',
+							'planchar',
+							'pegar botones',
+							'desvarate'
+							]
+						on_text: Operacion.text = self.text
+					Spinner:
+						text: '<Lote>'
+						id:Lote
+						size_hint_y: None
+						height: 20
+						values:
+							[
+							'S313',
+							'H1CC5800045',
+							'S13546',
+							'S122232A',
+							'S1213sdds5'
+							]
+						on_text: Lote.text = self.text
+					Spinner:
+						id:Talla_Tarea
+						text: '<Talla>'
+						size_hint_y: None
+						height: 20
+						values:
+							[
+							'Sin talla'
+							'4',
+							'6',
+							'8',
+							'10',
+							'12',
+							'14',
+							'16'
+							]
+						on_text: Talla_Tarea.text = self.text
+					MDTextField:
+						hint_text: 'Cantidad Tomada'
+						id:Cantidad_Tomada
+						text: '35'
+					MDTextField:
+						id:Cantidad_NoFinalizasada
+						hint_text:'Cantidad No Finalizasada'
+						text: '3'
+					MDFlatButton:
+						pos_hint: {"center_x": .5, "center_y": .5}
+						icon: "language-python"
+						text: "Guardar"
+						md_bg_color: 0, 1, 0, 1
+						on_press:app.tarea(Integrante.text,Operacion.text,Lote.text,Cantidad_Tomada.text,Talla_Tarea.text,Cantidad_NoFinalizasada.text)
+					MDFlatButton:
+						pos_hint: {"center_x": .5, "center_y": 5.1}
+						icon: "language-python"
+						text: "Cancelar"
+						md_bg_color: 1, 0,0, 1
+			Screen:
+				name: "scr 4"
+				BoxLayout:
+					ize_hint: 1,2
+					size: 300, 250
+					height: self.minimum_height
+					padding: dp(48)
+					spacing: 1
+					orientation: 'vertical'
+					MDLabel:
+						text:"Agregar nueva Operacion"
+						pos_hint: {'right': 1}
+					MDTextField:
+						id: Nombre_Operacion
+						hint_text: 'Nombre Operacioon'
+					MDTextField:
+						id: Precio_Operacion
+						hint_text: 'Precio de la Operacion $'
+					MDTextField:
+						hint_text: 'Duracion de la Operacion'
+						id:Duracion_Operacion
+					MDTextField:
+						id: Cantidad_Dia
+						hint_text: 'Cantidad al dia'
+					MDTextField:
+						id: Detalle_Operacion
+						hint_text: 'Detalle de la Operacion'
+					MDTextField:
+						id: Foto_Operacion
+						hint_text: 'foto Operacion'
+					MDFlatButton:
+						pos_hint: {"center_x": .5, "center_y": .5}
+						icon: "language-python"
+						text: "Guardar"
+						md_bg_color: 0, 1, 0, 1
+						on_press:app.operacion(Nombre_Operacion.text,Precio_Operacion.text,Duracion_Operacion.text,Cantidad_Dia.text,Foto_Operacion.text,Detalle_Operacion.text)
+					MDFlatButton:
+						pos_hint: {"center_x": .5, "center_y": 5.1}
+						icon: "language-python"
+						text: "Cancelar"
+						md_bg_color: 1, 0,0, 1
+			Screen:
+				name: "scr 5"
+				MDLabel:
+					text: "Registro"
+					halign: "center"
+			Screen:
+				name: "scr 6"
+				MDLabel:
+					text: "Configuracion"
+					halign: "center"
+
+		MDNavigationDrawer:
+			id: nav_drawer
+			ContentNavigationDrawer:
+				screen_manager: screen_manager
+				nav_drawer: nav_drawer
