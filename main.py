@@ -32,6 +32,6 @@ class ControlDestajo(MDApp):
     def selectOperacion(self):return Data.slctOperacion()
     def selectLote(self):return Data.slctLote()
     #build
-    def build(self):return Builder.load_file('pantalla/drawer.kv')# Builder.load_string(KV)
+    def build(self):return Builder.load_file('pantalla/main.kv')# Builder.load_string(KV)
 #run
 if __name__ == '__main__':ControlDestajo().run()
