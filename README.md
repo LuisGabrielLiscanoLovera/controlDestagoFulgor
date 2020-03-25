@@ -1,2 +1,1 @@
 # controlDestagoFulgor
-# controlDestagoFulgor
