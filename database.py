@@ -36,6 +36,7 @@ if not path.exists('/data/ctrlDestajo.db'):
                 Column('fecha', DateTime),
                 Column('nombreCompleto', String),
                 Column('NumDocumento', Integer),
+                Column('sexo', String),
                 Column('fotoIntegrante', String),#<--- column field Binary
                 Column('fotoFirma', String))#<--- column field Binary
     #operacion lista
@@ -60,12 +61,16 @@ if not path.exists('/data/ctrlDestajo.db'):
                 Column('cantNofinalizada', Integer))
     meta.create_all(engine)    
 else:pass
+
 def selectorRTList(self,tabla,pos):
     slct_tabla= tabla.select()
     result     = conn.execute(slct_tabla)
     row=result.fetchone()
-    lista = [row[pos]]
-    for row in result:lista.append(row[pos])
+    try:
+        lista = [row[pos]]
+        for row in result:lista.append(row[pos])
+    except :
+        lista = ["cargue datos!"]
     return lista
 
 class dataBase():
@@ -113,23 +118,13 @@ class dataBase():
 
         result = conn.execute(insert_estado)   
 
+    #select
+    def slctEstado(self):return selectorRTList(self,estado,2)
+    def slctIntegrante(self):return selectorRTList(self,integrante,2)
+    def slctOperacion(self):return selectorRTList(self,operacion,2)
+    def slctLote(self):return selectorRTList(self,lote,2)
 
-    def slctEstado(self):
-        #global estado
-        return selectorRTList(self,estado,2)
-
-    def slctEstados(self):
-        global conn, estado
-        #select estado
-        slct_Estado= estado.select()
-        result     = conn.execute(slct_Estado)
-        row=result.fetchone()
-        lista = [row[2]]
-        for row in result:
-            lista.append(row[2])
-            print (row[2])
-        print (len(lista))
-        return lista
+    
 
     def AddTarea(self,integrante,operacion,lote,cant_Tomada,talla,cant_Nofinalizada):
         global conn,tarea            

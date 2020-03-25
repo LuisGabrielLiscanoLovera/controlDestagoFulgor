@@ -71,6 +71,10 @@ Screen:
 					MDTextField:
 						id: Num_Documento
 						hint_text: 'Numero de Documento'
+					MDDropDownItem:
+						id: sexo
+						dropdown_bg: [1, 1, 1, 1]	
+						items: ["Hombre","Mujer","Otro"]
 					MDTextField:
 						id:Foto_Integrante		
 						hint_text: 'Foto Integrante'
@@ -82,7 +86,7 @@ Screen:
 						icon: "language-python"
 						text: "Guardar"
 						md_bg_color: 0, 1, 0, 1
-						on_press: app.integrante(Nombre_Completo.text,Num_Documento.text,Foto_Integrante.text,Foto_Firma.text)	
+						on_press: app.integrante(Nombre_Completo.text,Num_Documento.text,sexo.current_item,Foto_Integrante.text,Foto_Firma.text)	
 					MDFlatButton:
 						pos_hint: {"center_x": .5, "center_y": 5.1}
 						icon: "language-python"
@@ -120,20 +124,18 @@ Screen:
 						hint_text: 'Foto prenda 2'
 					MDTextField:
 						id:Detalle_Lote
-						hint_text: 'Detalle Lote'					
-
+						hint_text: 'Detalle Lote'
 					MDDropDownItem:
 						id: Estado
 						dropdown_bg: [1, 1, 1, 1]	
-						items: app.selectEstado()				
-					
+						items: app.selectEstado()
 					MDFillRoundFlatButton:
 						pos_hint: {"center_x": .5, "center_y": .5}
 						icon: "language-python"
 						text: "Guardar"
 						md_bg_color: 0, 1, 0, 1
 						on_press:app.lote(op.text,Num_Referencia.text,Foto_Prenda1.text,Foto_Prenda2.text,Lote_Total.text,Lote_Faltante.text,Detalle_Lote.text,Estado.current_item)
-					
+						on_release: toast("Guardado !")
 					MDFlatButton:
 						pos_hint: {"center_x": .5, "center_y": 5.1}
 						icon: "language-python"
@@ -152,68 +154,21 @@ Screen:
 						text:"Agregar nueva Tarea"
 						pos_hint: {'right': 1}
 					MDDropDownItem:
-						id: dropdown_item
-						items:['luis','millonariios']
-						dropdown_bg: [1, 1, 1, 1]
-					Spinner:
-						size_hint_y: None
-						height: 20
-						text: '<Integrante>'
 						id:Integrante
-						values:
-							[
-							'luis',
-							'gabriel',
-							'maria',
-							'paola'
-							]
-						on_text: Integrante.text = self.text
-					Spinner:
-						id: Operacion
-						size_hint_y: None
-						height: 20
-						text: '<Operacion>'
-						values:
-							[
-							'pulir',
-							'abotonar',
-							'lavar',
-							'planchar',
-							'pegar botones',
-							'desvarate'
-							]
-						on_text: Operacion.text = self.text
-					Spinner:
-						text: '<Lote>'
+						items:app.selectIntegrante()
+						dropdown_bg: [1, 1, 1, 1]
+					MDDropDownItem:
+						id:Operacion
+						items:app.selectOperacion()
+						dropdown_bg: [1, 1, 1, 1]
+					MDDropDownItem:
 						id:Lote
-						size_hint_y: None
-						height: 20
-						values:
-							[
-							'S313',
-							'H1CC5800045',
-							'S13546',
-							'S122232A',
-							'S1213sdds5'
-							]
-						on_text: Lote.text = self.text
-					Spinner:
-						id:Talla_Tarea
-						text: '<Talla>'
-						size_hint_y: None
-						height: 20
-						values:
-							[
-							'Sin talla'
-							'4',
-							'6',
-							'8',
-							'10',
-							'12',
-							'14',
-							'16'
-							]
-						on_text: Talla_Tarea.text = self.text
+						items:app.selectLote()
+						dropdown_bg: [1, 1, 1, 1]
+					MDDropDownItem:
+						id:Talla_Tarea						
+						dropdown_bg: [1, 1, 1, 1]
+						items:["Sin talla','4','6','8','10','12','14','16']
 					MDTextField:
 						hint_text: 'Cantidad Tomada'
 						id:Cantidad_Tomada
@@ -227,7 +182,7 @@ Screen:
 						icon: "language-python"
 						text: "Guardar"
 						md_bg_color: 0, 1, 0, 1
-						on_press:app.tarea(Integrante.text,Operacion.text,Lote.text,Cantidad_Tomada.text,Talla_Tarea.text,Cantidad_NoFinalizasada.text)
+						on_press:app.tarea(Integrante.current_item,Operacion.current_item,Lote.current_item,Talla_Tarea.current_item,Cantidad_Tomada.text,Cantidad_NoFinalizasada.text)
 					MDFlatButton:
 						pos_hint: {"center_x": .5, "center_y": 5.1}
 						icon: "language-python"
