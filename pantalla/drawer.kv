@@ -1,13 +1,11 @@
-
+#:import toast kivymd.toast.toast
 <ContentNavigationDrawer>:
 	ScrollView:
-
 		MDList:
 			AnchorLayout:
 				anchor_x: "center"
 				size_hint_y: None
 				height: avatar.height
-
 				Image:
 					id: avatar
 					size_hint: None, None
@@ -122,29 +120,20 @@ Screen:
 						hint_text: 'Foto prenda 2'
 					MDTextField:
 						id:Detalle_Lote
-						hint_text: 'Detalle Lote'
+						hint_text: 'Detalle Lote'					
+
 					MDDropDownItem:
-						id:Estado
-						dropdown_bg: [1, 1, 1, 1]
-						text: '<Estado>'
-						on_text: Estado.text = self.items
-						items:app.selectEstado()
-
-
-					MDDropDownItem: 
-						items: ['1 hello', '2 yyy', '3 kntl'] 
-						pos_hint: {"center_x": .5, "center_y": .6} 
-						on_select: app.handle_select 
-						
-
-
-						
-					MDFlatButton:
+						id: Estado
+						dropdown_bg: [1, 1, 1, 1]	
+						items: app.selectEstado()				
+					
+					MDFillRoundFlatButton:
 						pos_hint: {"center_x": .5, "center_y": .5}
 						icon: "language-python"
 						text: "Guardar"
 						md_bg_color: 0, 1, 0, 1
-						on_press:app.lote(op.text,Num_Referencia.text,Foto_Prenda1.text,Foto_Prenda2.text,Lote_Total.text,Lote_Faltante.text,Detalle_Lote.text,Estado.text)
+						on_press:app.lote(op.text,Num_Referencia.text,Foto_Prenda1.text,Foto_Prenda2.text,Lote_Total.text,Lote_Faltante.text,Detalle_Lote.text,Estado.current_item)
+					
 					MDFlatButton:
 						pos_hint: {"center_x": .5, "center_y": 5.1}
 						icon: "language-python"
